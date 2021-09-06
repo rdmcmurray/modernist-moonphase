@@ -5,6 +5,6 @@ secrets = {
 	"ssid" : "your_wifi_network_id",
 	"password" : "your_wifi_network_password", 
 	"aio_username" : "your_adafruit_io_username",
-    "aio_key" : "your_adafruit_io_key",
+	"aio_key" : "your_adafruit_io_key",
 	"timezone" : "your_timezone", #"Europe/London", http://worldtimeapi.org/timezones
 }
