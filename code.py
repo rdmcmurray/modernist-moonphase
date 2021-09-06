@@ -19,7 +19,7 @@ except (ConnectionError, ValueError, RuntimeError) as e:
 
 
 # 1. how often would you like to refresh, in hours?
-refresh_every_hours = 0.5
+refresh_every_hours = 12
 
 # 2. what hour of the day would you like to refresh(es) to start? 
 # starts at midnight by default. helpful if you want fewer per day, starting at specific times
@@ -28,7 +28,7 @@ refresh_start = time.mktime((now[0], now[1], now[2], 0, int(refresh_start_hour *
 
 # 3. how many hours ahead of the current phase should the magtag display?
 # eg; if it refreshes once at midnight, what phase do you want it to display for the coming day (until the next midnight)?
-display_phase_offset_hours = 0
+display_phase_offset_hours = 12
 
 # May 11, 2021 19:00 GMT is the reference for the start of the cycle (arbitrary, pick any new moon you'd like)
 # https://tidesandcurrents.noaa.gov/moon_phases.shtml?year=2021&data_type=monMay
