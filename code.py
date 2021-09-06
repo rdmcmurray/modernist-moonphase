@@ -12,7 +12,8 @@ magtag = MagTag()
 try:
 	magtag.network.connect()
 	magtag.get_local_time()
-	now = time.localtime()
+	now = time.time()
+	now_local = time.localtime(now)
 	
 except (ConnectionError, ValueError, RuntimeError) as e:
 	magtag.exit_and_deep_sleep(600)
@@ -24,7 +25,7 @@ refresh_every_hours = 12
 # 2. what hour of the day would you like to refresh(es) to start? 
 # starts at midnight by default. helpful if you want fewer per day, starting at specific times
 refresh_start_hour = 0
-refresh_start = time.mktime((now[0], now[1], now[2], 0, int(refresh_start_hour * 60), 0, now[6], now[7], now[8]))
+refresh_start = time.mktime((now_local[0], now_local[1], now_local[2], 0, int(refresh_start_hour * 60), 0, now_local[6], now_local[7], now_local[8]))
 
 # 3. how many hours ahead of the current phase should the magtag display?
 # eg; if it refreshes once at midnight, what phase do you want it to display for the coming day (until the next midnight)?
@@ -46,7 +47,7 @@ refresh_cycles = 24 // refresh_every_hours
 
 for i in range(refresh_cycles):
 	refresh_next = refresh_start + int(i  * refresh_every_hours * 60 * 60)
-	if refresh_next > time.time():
+	if refresh_next > now:
 		break
 
 # turn all these seconds into 0–1 phase value
@@ -61,7 +62,7 @@ moon_group = displayio.Group()
 date_group = displayio.Group()
 display_group = displayio.Group()
 
-date_sprite_tile_index = now[2] - 1
+date_sprite_tile_index = now_local[2] - 1
 date_group.y = 79
 
 num_tiles = 30
@@ -186,6 +187,6 @@ display.refresh()
 
 
 # zzzzzzzzzzzz
-secs_until_refresh = refresh_next - time.time()
+secs_until_refresh = refresh_next - now
 print("Sleeping for about", secs_until_refresh // 60, "minutes")
 magtag.exit_and_deep_sleep(secs_until_refresh)
