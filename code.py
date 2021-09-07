@@ -44,11 +44,14 @@ lunar_cycle_secs = lunar_cycle_days * 24 * 60 * 60
 
 # get the next refresh time
 refresh_cycles = 24 // refresh_every_hours
+refresh_next = refresh_start + (24 * 60 * 60)
 
 for i in range(refresh_cycles):
-	refresh_next = refresh_start + int(i  * refresh_every_hours * 60 * 60)
-	if refresh_next > now:
+	refresh = refresh_start + int(i  * refresh_every_hours * 60 * 60)
+	if refresh > now:
+		refresh_next = refresh_start + int(i  * refresh_every_hours * 60 * 60)
 		break
+
 
 # turn all these seconds into 0–1 phase value
 # 0 = new, 0.25 = first quarter, 0.5 = full, 0.75 = third quarter, 1 = new
